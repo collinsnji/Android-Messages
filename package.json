@@ -1,0 +1,61 @@
+{
+  "name": "android-messages",
+  "version": "1.0.0",
+  "description": "Android Messages for desktop",
+  "productName": "Android Messages",
+  "main": "main.js",
+  "license": "MIT",
+  "author": {
+    "name": "Collin Grimm",
+    "email": "support@collingrimm.me"
+  },
+  "scripts": {
+    "start": "electron .",
+    "installer": "electron-installer-dmg './build/Release/Android Messages-darwin-x64/Android Messages.app' 'Android Messages' --out=build/Release --overwrite --icon=assets/icons/mac/icon.icns",
+    "package": "electron-packager . --overwrite --asar=true --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=build/Release",
+    "postinstall": "install-app-deps",
+    "pack": "build --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "asar": true,
+    "appId": "me.collingrimm.android-messages",
+    "files": [
+      "**/*",
+      "!docs${/*}",
+      "!node_modules/@paulcbetts/cld/deps/cld${/*}"
+    ],
+    "mac": {
+      "category": "public.app-category.communication",
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "dmg": {
+      "background": "build/appdmg.png",
+      "icon": "build/icon.icns",
+      "iconSize": 100,
+      "contents": [
+        {
+          "x": 380,
+          "y": 280,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 100,
+          "y": 280,
+          "type": "file"
+        }
+      ]
+    }
+  },
+  "repository": "https://github.com/collinsnji/Android-Messages",
+  "keywords": [
+    "Android",
+    "Messages",
+    "Desktop app"
+  ],
+  "devDependencies": {
+    "electron": "^2.0.2",
+    "electron-packager": "^12.1.0"
+  }
+}

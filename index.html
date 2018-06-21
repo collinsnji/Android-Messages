@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Android Messages</title>
+</head>
+
+<body>
+  <script>
+    fetch('https://messages.android.com')
+      .then((response) => {
+        if (response.ok) {
+          return window.location.replace('https://messages.android.com');
+        }
+        // An Error Occurred
+        let errorMsg = document.createElement('p');
+        errorMsg.innerHTML = `Cannot Connect to Messages. \n Please check your internet connection and try again`;
+        return document.body.appendChild(errorMsg);
+      })
+      .catch((error) => {
+        console.log(`Network Error: ${error.message}`);
+        return document.body.innerHTML = `Network Error: ${error.message}`;
+      });
+  </script>
+</body>
+
+</html>
