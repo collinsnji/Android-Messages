@@ -6,9 +6,13 @@ const path = require('path');
 const appMenu = require('./src/Menu');
 
 let mainWindow;
-let messagesURL = path.join('file://', __dirname, '/index.html')
-  , destroyWindow = () => { mainWindow = null; }
-  , closeAllWindow = () => { if (process.platform !== 'darwin') app.quit(); };
+let messagesURL = path.join('file://', __dirname, '/index.html'),
+  destroyWindow = () => {
+    mainWindow = null;
+  },
+  closeAllWindow = () => {
+    if (process.platform !== 'darwin') app.quit();
+  };
 
 let createWindow = () => {
   mainWindow = new BrowserWindow({
@@ -25,11 +29,12 @@ let createWindow = () => {
 
   mainWindow.loadURL(messagesURL);
   mainWindow.on('closed', destroyWindow);
-
 };
 
 app.on('ready', createWindow);
 app.on('activate', createWindow);
 app.on('window-all-closed', closeAllWindow);
 
-ipcMain.on('close', () => { app.quit(); });
+ipcMain.on('close', () => {
+  app.quit();
+});
