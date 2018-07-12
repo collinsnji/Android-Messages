@@ -29,6 +29,7 @@ let createWindow = () => {
 };
 
 app.on('ready', createWindow);
+app.on('activate', createWindow);
 app.on('window-all-closed', closeAllWindow);
 
-ipcMain.on('close', () => { app.quit() });
+ipcMain.on('close', () => { app.quit(); });
